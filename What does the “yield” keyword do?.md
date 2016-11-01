@@ -1,10 +1,6 @@
 http://stackoverflow.com/questions/231767/what-does-the-yield-keyword-do
 
- 8451
-down vote
-accepted
-+550
-	
+
 
 To understand what yield does, you must understand what generators are. And before generators come iterables.
 Iterables
