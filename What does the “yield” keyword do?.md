@@ -6,19 +6,14 @@ To understand what yield does, you must understand what generators are. And befo
 Iterables
 
 When you create a list, you can read its items one by one. Reading its items one by one is called iteration:
-
-`>>> mylist = [1, 2, 3]`
-
-`>>> for i in mylist:`
-
-`...    print(i)`
-
-`1`
-
-`2`
-
-`3`
-
+```
+>>> mylist = [1, 2, 3]
+>>> for i in mylist:
+...    print(i)
+1
+2
+3
+```
 mylist is an iterable. When you use a list comprehension, you create a list, and so an iterable:
 ```
 >>> mylist = [x*x for x in range(3)]
@@ -36,18 +31,20 @@ Generators
 
 Generators are iterators, but you can only iterate over them once. It's because they do not store all the values in memory, they generate the values on the fly:
 
+```
 >>> mygenerator = (x*x for x in range(3))
 >>> for i in mygenerator:
 ...    print(i)
 0
 1
 4
+```
 
 It is just the same except you used () instead of []. BUT, you cannot perform for i in mygenerator a second time since generators can only be used once: they calculate 0, then forget about it and calculate 1, and end calculating 4, one by one.
 Yield
 
 Yield is a keyword that is used like return, except the function will return a generator.
-
+```
 >>> def createGenerator():
 ...    mylist = range(3)
 ...    for i in mylist:
@@ -61,6 +58,7 @@ Yield is a keyword that is used like return, except the function will return a g
 0
 1
 4
+```
 
 Here it's a useless example, but it's handy when you know your function will return a huge set of values that you will only need to read once.
 
@@ -104,14 +102,14 @@ result, candidates = list(), [self]
 while candidates:
 
     # Get the last candidate and remove it from the list
-    node = candidates.pop()
+    `node = candidates.pop()`
 
     # Get the distance between obj and the candidate
-    distance = node._get_dist(obj)
+    `distance = node._get_dist(obj)`
 
     # If distance is ok, then you can fill the result
-    if distance <= max_dist and distance >= min_dist:
-        result.extend(node._values)
+    `if distance <= max_dist and distance >= min_dist:`
+        `result.extend(node._values)`
 
     # Add the children of the candidate in the candidates list
     # so the loop will keep running until it will have looked
@@ -127,12 +125,13 @@ This code contains several smart parts:
     The extend() method is a list object method that expects an iterable and adds its values to the list.
 
 Usually we pass a list to it:
-
+```
 >>> a = [1, 2]
 >>> b = [3, 4]
 >>> a.extend(b)
 >>> print(a)
 [1, 2, 3, 4]
+```
 
 But in your code it gets a generator, which is good because:
 
@@ -143,7 +142,7 @@ And it works because Python does not care if the argument of a method is a list 
 
 You can stop here, or read a little bit to see an advanced use of a generator:
 Controlling a generator exhaustion
-
+```
 >>> class Bank(): # let's create a bank, building ATMs
 ...    crisis = False
 ...    def create_atm(self):
@@ -179,7 +178,7 @@ $100
 $100
 $100
 ...
-
+```
 It can be useful for various things like controlling access to a resource.
 Itertools, your best friend
 
@@ -188,7 +187,7 @@ The itertools module contains special functions to manipulate iterables. Ever wi
 Then just import itertools.
 
 An example? Let's see the possible orders of arrival for a 4 horse race:
-
+```
 >>> horses = [1, 2, 3, 4]
 >>> races = itertools.permutations(horses)
 >>> print(races)
@@ -218,7 +217,7 @@ An example? Let's see the possible orders of arrival for a 4 horse race:
  (4, 2, 3, 1),
  (4, 3, 1, 2),
  (4, 3, 2, 1)]
-
+```
 Understanding the inner mechanisms of iteration
 
 Iteration is a process implying iterables (implementing the __iter__() method) and iterators (implementing the __next__() method). Iterables are any objects you can get an iterator from. Iterators are objects that let you iterate on iterables.
